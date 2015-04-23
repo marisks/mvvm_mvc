@@ -3,7 +3,6 @@
 open System
 open System.Windows
 open FSharp.ViewModule
-open FSharp.ViewModule.Validation
 open FsXaml
 
 type MainView = XAML<"MainWindow.xaml", true>
@@ -31,17 +30,21 @@ type MainViewModel() as self =
     let incB() = score <- { score with ScoreB = score.ScoreB + 1 }
     let decB() = score <- { score with ScoreB = score.ScoreB - 1 }
     let newGame() = score <- defaultScore
-    
+
     let buildCommands (incA, decA, incB, decB, newGame) =
-        let commands = [incA; decA; incB; decB; newGame] |> List.map (fun f -> f >> updateScore)
+        let commands = [incA; decA; incB; decB; newGame] 
+                        |> List.map (fun f -> f >> updateScore)
         match commands with
         | [A; B; C; D; E] -> A, B, C, D, E
         | _ -> failwith "Error"
 
-    let (incACommand, decACommand, incBCommand, decBCommand, newGameCommand) = buildCommands(incA, decA, incB, decB, newGame)
+    let (incACommand, decACommand, incBCommand, decBCommand, newGameCommand) = 
+        buildCommands(incA, decA, incB, decB, newGame)
 
-    member self.ScoreA with get() = scoreA.Value and set value = scoreA.Value <- value
-    member self.ScoreB with get() = scoreB.Value and set value = scoreB.Value <- value
+    member self.ScoreA with get() = scoreA.Value 
+                        and set value = scoreA.Value <- value
+    member self.ScoreB with get() = scoreB.Value 
+                        and set value = scoreB.Value <- value
 
     member self.IncA = self.Factory.CommandSync(incACommand)
     member self.DecA = self.Factory.CommandSync(decACommand)

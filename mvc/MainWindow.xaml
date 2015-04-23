@@ -6,7 +6,7 @@
         Title="gasby" Height="750" Width="1200">
     <DockPanel LastChildFill="True">
         <StackPanel DockPanel.Dock="Bottom" Height="75" Orientation="Horizontal" Background="#FF3A3A3A">
-            <Button x:Name="NewGameButton"  Height="70" Width="70" Margin="2" Command="{Binding NewGame}">
+            <Button x:Name="NewGameButton"  Height="70" Width="70" Margin="2">
                 <TextBlock Text="New" FontSize="18"></TextBlock>
             </Button>
         </StackPanel>
