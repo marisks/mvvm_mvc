@@ -32,7 +32,8 @@ type MainView(root : MainWindow) as x =
                     root.DecBButton, DecB
                     root.NewGameButton, New
                 ]
-                |> List.map (fun (btn, evt) -> btn.Click |> Observable.mapTo evt)
+                |> List.map (fun (btn, evt) -> btn.Click 
+                                            |> Observable.mapTo evt)
             yield! buttonClicks
         ]
 
